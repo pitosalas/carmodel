@@ -1,0 +1,17 @@
+{
+	level: 3,
+	rows: 3,
+	cols: 3,
+	actors: [
+				{name: "Car1", row: 1, col: 0, dir: east}
+			],
+			 
+	map: 	[ 	[ "WNR", "NR", "NER" ],
+			  	[ "WR", "ER", "EWR"],
+				[ "WSR", "SR", "ESR"]],
+				
+	decList: 	[ 	{name: "big-building", pos: [0, 0], dim: [40, 40]},
+	               	{name: "park-path-1", pos: [0, 0], dim: [40, 40]}
+	            ],
+	decPlacement:	[ 	{ name: "big-building", coord: [22, 34] } ]
+}
