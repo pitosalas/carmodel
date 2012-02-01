@@ -4,5 +4,5 @@ package com.salas;
 // the car model classes which adds its fields.
 
 public class ModelContext {
-
+	World world;
 }

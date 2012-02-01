@@ -7,12 +7,13 @@ import com.salas.TileModel.TDir;
 
 public class LevelModel {
 
-	private static float DEFAULT_COORD_SCALE_FACTOR = 300.0f;
-
+	private static float DEFAULT_COORD_SCALE_FACTOR = 300;
+	int level;
 	int gridRows, gridColumns;
 	TileModel[][] grid;
 	private ArrayList<ActorModel> actors;
 	private HashMap<String, DecorationModel> decorations;
+	public String tmxFileName;
 	float coordScaleFactor = DEFAULT_COORD_SCALE_FACTOR;
 
 	LevelModel(int rows, int cols) {

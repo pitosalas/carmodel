@@ -39,9 +39,8 @@ public class LevelModelFactory {
 
 // A LevelMap is pre-populated with zero or more actors.
 	class ActorDesc {
-		int level;			// level number
-		int row;			// Initial Row 
-		int col;			// Initial Column
+		int row;			// Initial Row or X
+		int col;			// Initial Column or Y
 		String type;		// String denotes the type
 		TDir dir;			// direction (N,S,E or W)
 		String name;		// Name of it
@@ -66,8 +65,10 @@ public class LevelModelFactory {
 
 // Describes a full level
 	class LevelDesc {
+		int level;			// level number
 		int rows;			// Width of map
 		int cols;			// Height of map
+		String tmxFilename;	// Filename of TMX tile map descriptor file
 		ActorDesc[] actors;	// Zero or more initial actors
 		DecorationDesc[] decList; // Zero or more decorations over the map
 		DecPlaceDesc[] decPlacement; // Each decoration may be used in more than one place.
@@ -97,6 +98,8 @@ public class LevelModelFactory {
 		HashMap<String, DecorationModel> decorations = decorationsFromDesc(levelDesc.decList, levelDesc.decPlacement);
 		level.setActors(actors);
 		level.setDecorations(decorations);
+		level.tmxFileName = levelDesc.tmxFilename;
+		level.level = levelDesc.level;
 		return level;
 	}
 
@@ -135,19 +138,23 @@ public class LevelModelFactory {
 	
 	private static LevelModel gameMapfromStringMap(int rows, int cols, String[][] map) {
 		LevelModel m = new LevelModel(rows, cols);
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < cols; col++) {
-				TileModel t = new TileModel();
+		for (int row = 0; row < map.length; row++) {
+			for (int col = 0; col < map[row].length; col++) {
 				String c = map[row][col];
-				t.setIsRoad(c.contains("R"));
-				t.setBlocked(TDir.west, (c.contains("W")|| c.contains("X")));
-				t.setBlocked(TDir.north, (c.contains("N")|| c.contains("X")));
-				t.setBlocked(TDir.east, (c.contains("E")|| c.contains("X")));
-				t.setBlocked(TDir.south, (c.contains("S")|| c.contains("X")));
-				m.setTileAtCoord(t, new TCoord(row, col));
+				tileFromSpecString(m, row, col, c);
 			}
 		}
 		return m;
+	}
+
+	public static void tileFromSpecString(LevelModel m, int row, int col, String c) {
+		TileModel t = new TileModel();
+		t.setIsRoad(c.contains("R"));
+		t.setBlocked(TDir.west, (c.contains("W")|| c.contains("X")));
+		t.setBlocked(TDir.north, (c.contains("N")|| c.contains("X")));
+		t.setBlocked(TDir.east, (c.contains("E")|| c.contains("X")));
+		t.setBlocked(TDir.south, (c.contains("S")|| c.contains("X")));
+		m.setTileAtCoord(t, new TCoord(row, col));
 	}
 	
 	static LevelModel contructFromStringMap(String paramsJ, String[][] map) {

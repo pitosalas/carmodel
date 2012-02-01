@@ -13,5 +13,7 @@
 	decList: 	[ 	{name: "big-building", pos: [0, 0], dim: [40, 40]},
 	               	{name: "park-path-1", pos: [0, 0], dim: [40, 40]}
 	            ],
-	decPlacement:	[ 	{ name: "big-building", coord: [22, 34] } ]
+	decPlacement:	[ 	{ name: "big-building", coord: [22, 34], offsetFactor: [0.6, 0.55] } ]
 }
+
+
