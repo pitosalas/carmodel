@@ -9,16 +9,22 @@ import com.salas.TileModel.TDir;
 public class ActorModel {
 	private int startRow;
 	private int startCol;
+	private float startXPos;
+	private float startYPos;
+	private float startRotation;
 	private TDir startDir;
 	private String type;
 	private String name;
 
-	public ActorModel(String typ, String nme, int row, int col, TDir dr) {
+	public ActorModel(String typ, String nme, int row, int col, TDir dr, float startX, float startY, float startRot) {
 		startRow = row;
 		startCol = col;
 		type = typ;
 		startDir = dr;
 		name = nme;
+		startXPos = startX;
+		startYPos = startY;
+		startRotation = startRot;
 	}
 	
 	public TCoord getStartingTCoord() {
@@ -40,4 +46,13 @@ public class ActorModel {
 	public String getName() {
 		return name;
 	}
+
+	public Vector2 getStartingPos() {
+		return new Vector2(startXPos, startYPos);
+	}
+	public float getStartingRotation() {
+		return startRotation;
+	}
+
+
 }

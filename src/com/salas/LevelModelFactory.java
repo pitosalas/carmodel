@@ -44,6 +44,9 @@ public class LevelModelFactory {
 		String type;		// String denotes the type
 		TDir dir;			// direction (N,S,E or W)
 		String name;		// Name of it
+		float startXPos;	// XPosition (alternative to Row and Col
+		float startYPos;	// YPosition
+		float startRotation;// Rotation (alternative to direction)
 		ActorDesc() {}
 	}
 
@@ -107,7 +110,7 @@ public class LevelModelFactory {
 		ArrayList<ActorModel> actors = new ArrayList<ActorModel>(actorDescs.length);
 		for (int i = 0; i < actorDescs.length; i++) {
 			ActorDesc ad = actorDescs[i];
-			actors.add(i, new ActorModel(ad.type, ad.name, ad.row, ad.col, ad.dir));
+			actors.add(i, new ActorModel(ad.type, ad.name, ad.row, ad.col, ad.dir, ad.startXPos, ad.startYPos, ad.startRotation));
 		}
 		return actors;
 	}
@@ -169,7 +172,7 @@ public class LevelModelFactory {
 
 		// Setup list of actors to be a single one
 		ArrayList<ActorModel> actors = new ArrayList<ActorModel>(1);
-		actors.add(0, new ActorModel("Car", "Car", p.row, p.col, p.direction));
+		actors.add(0, new ActorModel("Car", "Car", p.row, p.col, p.direction, 0, 0, 0));
 		m.setActors(actors);
 		return m;
 	}
