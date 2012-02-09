@@ -3,10 +3,15 @@ package com.salas;
 public class VehicleEntity extends BaseEntity {
 
 	SteeringBehaviors steering;
+	public StateMachine<VehicleEntity> state;
+
 	
 	public VehicleEntity(World gameCtx, EntityBody ebody, EntitySprite esprite) {
 		super(gameCtx, ebody, esprite);
 		world.vehicles.add(this);
+		state = new StateMachine<VehicleEntity>(this);
+		state.setCurrentState(new StateDriving());
+		state.setGlobalState(new StateGlobalVehicle());
 	}
 	
 	public void start() {

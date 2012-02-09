@@ -1,6 +1,5 @@
 package com.salas;
 
-import com.salas.TileModel.TDir;
 
 // Base class for GameActors, which are things like cars, trucks, towtrucks, and so on, which are
 // located on and travel around the game space for a GameLevel. When instantiated they lead to the
@@ -35,7 +34,7 @@ public class ActorModel {
 		return startDir;
 	}
 
-	public TPos getStartingTPos(LevelModel rmap) {
+	public TPos getStartingTPos(Level rmap) {
 		return rmap.convTCoord2Tpos(getStartingTCoord());
 	}
 

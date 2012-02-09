@@ -11,7 +11,7 @@ public class TestLevelModelFactory {
 
 	@Test
 	public void testConstructFromJson() {
-		LevelModel amodel = LevelModelFactory.constructFromJson("test/fixtures/test1.json");
+		Level amodel = LevelModelFactory.constructFromJson("test/fixtures/test1.json");
 		HashMap<String, DecorationModel> decos = amodel.decorations();
 		assertEquals(2, decos.size());
 		DecorationModel dmBB = decos.get("big-building");

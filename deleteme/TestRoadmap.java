@@ -11,13 +11,13 @@ public class TestRoadmap {
 
 	@Test
 	public void testRoadmap() {
-		LevelModel r = new LevelModel(20, 30);
+		Level r = new Level(20, 30);
 		assertNotNull(r);
 	}
 
 	@Test
 	public void testLocFromTile() {
-		LevelModel r = new LevelModel(5, 9);
+		Level r = new Level(5, 9);
 		TileModel t = new TileModel(new TCoord(3, 5), null, false);
 		r.setTileAtCoord(t, new TCoord(3, 5));
 		TPos loc = r.getSpriteTLPos(t);
@@ -28,7 +28,7 @@ public class TestRoadmap {
 
 	@Test
 	public void testTileAtLoc() {
-		LevelModel r = new LevelModel(10, 10);
+		Level r = new Level(10, 10);
 		TileModel t = new TileModel(new TCoord(3, 3), null, false);
 		r.setTileAtCoord(t, new TCoord(3, 3));
 		TileModel u = r.getTile(new TCoord(3,3));
@@ -38,7 +38,7 @@ public class TestRoadmap {
 
 	@Test
 	public void testSetTileAtCoord() {
-		LevelModel r = new LevelModel(20,10);
+		Level r = new Level(20,10);
 		TileModel t = new TileModel(new TCoord(4, 4), null, false);
 		r.setTileAtCoord(t, new TCoord(4,4));
 		assertSame(t, r.getTile(new TCoord(4, 4)));
@@ -46,7 +46,7 @@ public class TestRoadmap {
 
 	@Test
 	public void testSetTileAtCoordNoArg() {
-		LevelModel r = new LevelModel(20,10);
+		Level r = new Level(20,10);
 		TileModel t = new TileModel();
 		r.setTileAtCoord(t, new TCoord(4,4));
 		assertSame(t, r.getTile(new TCoord(4, 4)));
@@ -54,7 +54,7 @@ public class TestRoadmap {
 	
 	@Test
 	public void testContructFromStringMap() {
-		LevelModel r;
+		Level r;
 		String[][] map = { { "R", "R"},  
 					 { "R", "R"} };
 		r = LevelModelFactory.contructFromStringMap("{ row: 1, col: 1, direction: north}", map);
@@ -72,7 +72,7 @@ public class TestRoadmap {
 	
 	@Test
 	public void testSample1() {
-		LevelModel r = LevelModelFactory.createSample1();
+		Level r = LevelModelFactory.createSample1();
 		assertNotNull(r);
 		assertEquals(new TCoord(3, 2), r.getActor(0).getStartingTCoord());
 		TileModel t = r.getTile(new TCoord(3, 2));
@@ -81,7 +81,7 @@ public class TestRoadmap {
 	}
 	@Test
 	public void testSample2() {
-		LevelModel r = LevelModelFactory.createSample2();
+		Level r = LevelModelFactory.createSample2();
 		assertNotNull(r);
 		assertEquals(new TCoord(3, 2), r.getActor(0).getStartingTCoord());
 		TileModel t = r.getTile(new TCoord(3, 2));
@@ -91,7 +91,7 @@ public class TestRoadmap {
 
 	@Test
 	public void testSample3() {
-		LevelModel r = LevelModelFactory.createSample3();
+		Level r = LevelModelFactory.createSample3();
 		assertNotNull(r);
 	}
 }

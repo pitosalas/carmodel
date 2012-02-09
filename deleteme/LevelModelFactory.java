@@ -84,7 +84,7 @@ public class LevelModelFactory {
 		DecDim() {}
 	}
 	
-	static LevelModel constructFromJson(String fileName) {
+	static Level constructFromJson(String fileName) {
 		try {
 			FileReader f = new FileReader(fileName);
 			return constructFromJson(f);			
@@ -93,10 +93,10 @@ public class LevelModelFactory {
 			return null;
 		}
 	}
-	public static LevelModel constructFromJson(InputStreamReader aJsonFileStream) {
+	public static Level constructFromJson(InputStreamReader aJsonFileStream) {
 		Gson gson = new Gson();
 		LevelDesc levelDesc = gson.fromJson(aJsonFileStream, LevelDesc.class);
-		LevelModel level = gameMapfromStringMap(levelDesc.rows, levelDesc.cols, levelDesc.map);
+		Level level = gameMapfromStringMap(levelDesc.rows, levelDesc.cols, levelDesc.map);
 		ArrayList<ActorModel> actors  = actorsFromDesc(levelDesc.actors);
 		HashMap<String, DecorationModel> decorations = decorationsFromDesc(levelDesc.decList, levelDesc.decPlacement);
 		level.setActors(actors);
@@ -139,8 +139,8 @@ public class LevelModelFactory {
 	}
 	
 	
-	private static LevelModel gameMapfromStringMap(int rows, int cols, String[][] map) {
-		LevelModel m = new LevelModel(rows, cols);
+	private static Level gameMapfromStringMap(int rows, int cols, String[][] map) {
+		Level m = new Level(rows, cols);
 		for (int row = 0; row < map.length; row++) {
 			for (int col = 0; col < map[row].length; col++) {
 				String c = map[row][col];
@@ -150,7 +150,7 @@ public class LevelModelFactory {
 		return m;
 	}
 
-	public static void tileFromSpecString(LevelModel m, int row, int col, String c) {
+	public static void tileFromSpecString(Level m, int row, int col, String c) {
 		TileModel t = new TileModel();
 		t.setIsRoad(c.contains("R"));
 		t.setBlocked(TDir.west, (c.contains("W")|| c.contains("X")));
@@ -160,13 +160,13 @@ public class LevelModelFactory {
 		m.setTileAtCoord(t, new TCoord(row, col));
 	}
 	
-	static LevelModel contructFromStringMap(String paramsJ, String[][] map) {
+	static Level contructFromStringMap(String paramsJ, String[][] map) {
 		int rows = map.length;
 		int cols = map[0].length;
 		for (int i = 0; i < rows; i++) {
 			assert cols == map[i].length;
 		}
-		LevelModel m = gameMapfromStringMap(rows, cols, map);
+		Level m = gameMapfromStringMap(rows, cols, map);
 		Gson gson = new Gson();
 		Params p = gson.fromJson(paramsJ, Params.class);
 
@@ -178,7 +178,7 @@ public class LevelModelFactory {
 	}
 
 	
-	static LevelModel createSample2() {
+	static Level createSample2() {
 		String[][] map = { { "WNR", "NSR", "NSR", "NSR", "NSR", "NER", "WN" },
 				{ "WER", "WNS", "NS", "NS", "NSE", "EWR", "W" },
 				{ "WSR", "NSR", "NR", "NSR", "NSR", "ESR", "W" },
@@ -186,7 +186,7 @@ public class LevelModelFactory {
 		return contructFromStringMap("{ row: 3, col: 2, direction: north}", map);
 	}
 	
-	static LevelModel createSample1() {
+	static Level createSample1() {
 		String[][] map = { { "WNR", "NSR", "NSR", "NSR", "NSR", "NER" },
 				{ "WER", "WNS", "NS", "NS", "NSE", "EWR" },
 				{ "WSR", "NSR", "NR", "NSR", "NSR", "ESR" },
@@ -195,7 +195,7 @@ public class LevelModelFactory {
 				map);
 	}
 	
-	static LevelModel createSample3() {
+	static Level createSample3() {
 		String[][] map = 
 				{ { "NWR", "NSR",  "NR", "NSR", "NSR", "NSR", "NR",  "NESR"},
 				  { "EWR", "NSEWS","EWR","NWS", "NS" , "NE",  "EWR", "NWSE"},

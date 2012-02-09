@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 // World is used to carry context of the overall game. 
 
-public abstract class World {
+public abstract class World<Bodies extends WorldBodies, Sprites extends WorldSprites> {
 	
 // Domain model: information about the game semnatics and AI
 		public static ArrayList<VehicleEntity> vehicles = new ArrayList<VehicleEntity>();
 		
-		public void prepareVehicles() {
+		public void launchVehicles() {
 			for (VehicleEntity v : World.vehicles) {
 				v.sprite.createSprite();
 				sprites.attach(v.sprite);
@@ -22,8 +22,8 @@ public abstract class World {
 		}
 
 // Implementation model: how is car game instantiated on this platform
-		WorldBodies bodies;
-		WorldSprites sprites;
+		Bodies bodies;
+		Sprites sprites;
 
 		abstract void registerUpdateHandler(WorldBodies bodies);
 		abstract public void registerUpdateHandler(float secondInterval, VehicleUpdateHandler handler);
