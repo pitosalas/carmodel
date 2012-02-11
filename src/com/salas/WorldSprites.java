@@ -8,7 +8,7 @@ public abstract class WorldSprites {
 	abstract void showCursorAt(Vector2 loc);
 	abstract void showRedVectorFrom(Vector2 origin, Vector2 vector);
 	abstract void showGreenVectorFrom(Vector2 origin, Vector2 vector);
-	abstract void showPath(Path apath);
+	abstract void showRoadGraph(Level toshow);
 	abstract void showTooltipA(float x, float y, String text);
 	abstract void showTooltipB(float x, float y, String text);
 	abstract void log(String string);

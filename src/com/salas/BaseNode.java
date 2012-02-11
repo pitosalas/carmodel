@@ -1,17 +1,24 @@
 package com.salas;
 
+import static com.google.common.base.Preconditions.*;
+
 public class BaseNode {
-	private static int nextIndex = 1;
 	final static int INVALID = -1;
+	private String name;
 	
 	int index;
 	
-	public BaseNode() {
-		this(nextIndex);
-		nextIndex++;
+	public BaseNode(int theIndex, String newname) {
+      checkNotNull(theIndex);
+		index = theIndex;
+		name = newname;
 	}
 	
-	public BaseNode(int theIndex) {
-		index = theIndex;
+	public String name() {
+	   return name;
+	}
+	
+	public void setName(String s) {
+	   name = s;
 	}
 }

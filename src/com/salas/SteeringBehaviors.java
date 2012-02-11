@@ -25,7 +25,6 @@ public class SteeringBehaviors {
 	}
 
 	public Vector2 calculate() {
-		world.sprites.showPath(path);
 		Vector2 steer = followPath(path);
 		steer.truncate(maxSteeringForce.getVal());
 
