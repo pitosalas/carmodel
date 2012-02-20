@@ -1,5 +1,7 @@
 package com.salas;
 
+import com.salas.graph.*;
+
 public class Intersection extends BaseNode {
 	private Vector2 pos = new Vector2();
 	

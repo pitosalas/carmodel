@@ -20,7 +20,7 @@ package com.salas;
  */
 public final class Vector2 {
 	// Useful constants
-	final static Vector2 zero = new Vector2(0,0);
+	public final static Vector2 zero = new Vector2(0,0);
 
 	/** static temporary vector **/
 	private final static Vector2 tmp = new Vector2();

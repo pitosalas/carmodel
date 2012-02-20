@@ -16,7 +16,7 @@ public class Path {
 		setPoints(points);
 	}	
 	
-	Path (boolean loop, Vector2...points) {
+	public Path (boolean loop, Vector2...points) {
 		this();
 		setPoints(points);
 		setLoop(loop);

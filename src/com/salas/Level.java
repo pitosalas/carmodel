@@ -3,6 +3,8 @@ package com.salas;
 import static com.google.common.base.Preconditions.*;
 import java.util.*;
 
+import com.salas.graph.*;
+
 public class Level {
    private BaseGraph <Intersection, Road> graph;
 	private int nextIntersectionIndex = 0;
@@ -52,7 +54,7 @@ public class Level {
 
    public void loopOverAllIntersections(IntersectionHandler intersectionHandler) {
       for (Intersection xctn: graph.nodeList()) {
-         intersectionHandler.intersection(xctn.name(), xctn.position());
+         intersectionHandler.intersection(xctn, xctn.name(), xctn.position());
       }
    }
    
@@ -71,10 +73,14 @@ public class Level {
 
    // Interfaces for methods above   
    public interface IntersectionHandler {
-      void intersection(String name, Vector2 position);
+      void intersection(Intersection xctn, String name, Vector2 position);
    }
    
    public interface RoadLoopHandler {
       void road(String name, Vector2 fromVector, Vector2 toVector);
+   }
+
+   public Intersection randomNextIntersection(Intersection target, Intersection source) {
+      return graph.randomNextNode(target, source);
    }
 }
