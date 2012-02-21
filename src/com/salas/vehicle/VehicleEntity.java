@@ -9,13 +9,12 @@ import com.salas.world.*;
 public class VehicleEntity extends BaseEntity {
 
    public StateMachine<VehicleEntity> state;
-
    SteeringBehaviors steering;
    public Vector2 startingPos;
    public float startingRotation;
    String name;
 
-   public VehicleEntity(World gameCtx, EntityBody ebody, EntitySprite esprite) {
+   public VehicleEntity(World<?,?> gameCtx, EntityBody ebody, EntitySprite esprite) {
       super(gameCtx, ebody, esprite);
       startingPos = new Vector2();
       steering = new SteeringBehaviors(this, world);
@@ -78,8 +77,13 @@ public class VehicleEntity extends BaseEntity {
 
    // Return true if this object is closer to place than "d" meters
    public boolean near(Vector2 place, double d) {
-      float dist2 = place.dst2(getPos());
-      logI("getPos()= "+getPos()+", dist2="+dist2);
-      return (dist2 < d);
+      float dist = place.dst(getPos());
+//      logI("getPos()= "+getPos()+", dist2 = "+dist);
+      return (dist < d);
+   }
+   
+   public String getToolTipText() {
+      String s = "State: " + state.toString() + "\n" + body.getTooltTipText();
+      return s;
    }
 }

@@ -1,8 +1,6 @@
 package com.salas.entity;
 
 import com.salas.messageing.*;
-import com.salas.statemachine.*;
-import com.salas.vehicle.*;
 import com.salas.world.*;
 
 
@@ -10,9 +8,9 @@ public abstract class BaseEntity {
 
 	public EntityBody body;
 	public EntitySprite sprite;
-	public World world;
+	public World<?,?> world;
 
-	public BaseEntity(World ctx, EntityBody bdy, EntitySprite sprt) {
+	public BaseEntity(World<?,?> ctx, EntityBody bdy, EntitySprite sprt) {
 		world = ctx;
 		body = bdy;
 		sprite = sprt;
@@ -28,6 +26,7 @@ public abstract class BaseEntity {
    }
 
    public abstract void updateState();
-   
+
+   abstract public String getToolTipText();   
 
 }

@@ -51,19 +51,46 @@ public class BaseGraph<Node extends BaseNode, Edge extends BaseEdge> {
    }
 
    public int nodeCount() {
-      return nodes.size();
+      int res = 0;
+      for (Node n : nodes) {
+         if (n != null) res++;
+      }
+      return res;
    }
+   
+   public int edgeListNodeCount() {
+      int res = 0;
+      for (ArrayList<Edge> elist : edges) {
+         if (elist != null) res++;
+      }
+      return res;
+   }
+
 
    // New edge is added twice to the vector of edge lists, one for the source and one for the destination
 	public void addEdge(Edge newedge) {
 	   edgesSlotPrepare(newedge.from);
 	   edgesSlotPrepare(newedge.to);
 	   
-	   edges.get(newedge.from).add(newedge);
-      edges.get(newedge.to).add(newedge);
-	}
+	   smartEdgeAdd(edges.get(newedge.from), newedge);
+	   
+	   // When we add 'edge' to the other end of the edge (the To end) we want
+	   // to reverse from and to, so that for each Node's edgelist, each entry
+	   // contains it's own node number as the 'from'.
+	   Edge reverse = (Edge) newedge.clone();
+	   reverse.reversePolarity();
+	   smartEdgeAdd(edges.get(reverse.from), reverse);
+   	}
 	
-	public int edgesFromCount(int index) {
+	// Add an edge to an edgelist, as long as it's not a duplicate
+	private void smartEdgeAdd(ArrayList<Edge> edgelist, Edge newedge) {
+	   for (Edge e: edgelist) {
+	      if (e.from == newedge.from && e.to == newedge.to) return;
+	   }
+	   edgelist.add(newedge);
+   }
+
+   public int edgesFromCount(int index) {
       edgesSlotPrepare(index);
       return edges.get(index).size();
    }
@@ -104,15 +131,37 @@ public class BaseGraph<Node extends BaseNode, Edge extends BaseEdge> {
    }
 
    // Given a certain node, return a randomm adjacent node. If an origin is
-   // specified then never return to it.
+   // specified then never return to it unless there's no other choice.
    public Node randomNextNode(Node target, Node origin) {
       ArrayList<Edge>adjacents = edges.get(target.index);
+      int adjacentsCount = adjacents.size();
+      if (adjacentsCount == 1)
+      {
+         adjacentsCount = 1;
+      }
       int targetIndex = target.index;
       Node result;
       do {
-         Edge e = adjacents.get(new Random().nextInt(adjacents.size()));
+         Edge e = adjacents.get(new Random().nextInt(adjacentsCount));
          result = nodes.get(e.otherEnd(targetIndex));
-      } while (origin != null && result == origin);
+      } while (adjacentsCount != 1 && origin != null && result == origin);
       return result;
    }
+   
+   public ArrayList<String> validate() {
+      ArrayList<String> errors = new ArrayList<String>();
+      for (int i = 0; i < edges.size(); i++) {
+         ArrayList<Edge> edgelist = edges.get(i);
+         boolean nulledgelist = (edgelist == null);
+         boolean nullnode = (nodes.get(i) == null);
+         if (nulledgelist != nullnode) {
+            errors.add("Edgelist and Node slots don't correspond");
+         }
+         for (Edge e: edgelist) {
+            if (e.from != i) errors.add("An edge for node: " + i + " does not have a correct from field");
+         }
+      }
+      return errors;
+   }
+
 }

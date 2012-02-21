@@ -58,4 +58,8 @@ public class StateMachine<T extends BaseEntity> {
       }
 	}
 	
+	public String toString() {
+	   return currentState.toString();
+	}
+	
 }

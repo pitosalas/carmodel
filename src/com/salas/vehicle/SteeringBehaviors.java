@@ -8,19 +8,19 @@ import com.salas.world.*;
 
 public class SteeringBehaviors {
 	
-	static TweakBox wayPointSeekDistance = new TweakBox("WayPtDist", 2.5f, 0.5f);
+	public static TweakBox wayPointSeekDistance = new TweakBox("WayPtDist", 3.0f, 0.5f);
 	static TweakBox decelTweak = new TweakBox("DecelTwk", 11.0f, 1.0f);
-	static TweakBox decelBeginDist = new TweakBox("DecelBegDist", 1.5f, 0.5f);
-	static TweakBox maxSteeringForce = new TweakBox("MaxSteering", 400.0f, 10.0f);
+	static TweakBox decelBeginDist = new TweakBox("DecelBegDist", 2.5f, 0.5f);
+	static TweakBox maxSteeringForce = new TweakBox("MaxSteering", 500.0f, 10.0f);
 	
 	boolean arrivalSteering;
    private boolean patrollingSteering;
 		
 	public BaseEntity entity;
-	public World world;
+	public World<?,?> world;
 	public Path path;
 	
-	public SteeringBehaviors(BaseEntity ent, World ctx) {
+	public SteeringBehaviors(BaseEntity ent, World<?,?> ctx) {
 		entity = ent;
 		world = ctx;
 	}
@@ -56,7 +56,7 @@ public class SteeringBehaviors {
 	   if (arrivalSteering) {
 	      steer = arrive(destination, Deceleration.fast);
 	      world.sprites.showCursorAt(destination);
-	      world.sprites.showTooltipA(entity.body.getPos().x, entity.body.getPos().y, entity.body.getTooltTipText());
+	      world.sprites.showTooltipA(entity.body.getPos().x, entity.body.getPos().y, entity.getToolTipText());
 	   }
 	   
 	   if (patrollingSteering) {
@@ -71,7 +71,7 @@ public class SteeringBehaviors {
 	         currWayPoint = patrollingRoute.get(currIntersect).position();
 	      }
 	      world.sprites.showCursorAt(currWayPoint);
-	      world.sprites.showTooltipA(entity.body.getPos().x, entity.body.getPos().y, entity.body.getTooltTipText());
+	      world.sprites.showTooltipA(entity.body.getPos().x, entity.body.getPos().y, entity.getToolTipText());
          steer =  arrive(currWayPoint.cpy(), Deceleration.fast);
 	   }
 		return steer;

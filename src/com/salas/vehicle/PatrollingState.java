@@ -5,7 +5,6 @@ import java.util.*;
 import com.salas.*;
 import com.salas.messageing.*;
 import com.salas.statemachine.*;
-import com.salas.vehicle.*;
 
 public class PatrollingState extends State<VehicleEntity> {
 

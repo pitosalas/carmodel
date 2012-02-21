@@ -21,4 +21,8 @@ public class BaseNode {
 	public void setName(String s) {
 	   name = s;
 	}
+	
+	public String toString() {
+	   return name;
+	}
 }

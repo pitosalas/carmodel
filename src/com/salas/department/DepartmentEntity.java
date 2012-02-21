@@ -18,7 +18,7 @@ public class DepartmentEntity extends BaseEntity {
    Vector2 departmentOrigin = new Vector2(3,3);
    
    // Department is an Entity without sprites or body
-   public DepartmentEntity(World world) {
+   public DepartmentEntity(World<?,?> world) {
       super(world, null, null);
       state = new StateMachine<DepartmentEntity>(this);
       state.setGlobalState(new DepartmentGlobalState());
@@ -68,5 +68,11 @@ public class DepartmentEntity extends BaseEntity {
             route.add(inter);
          } });
       return route;
+   }
+
+   @Override
+   public String getToolTipText() {
+      String s = "State: " + state.toString() + "\n" + body.getTooltTipText();
+      return s;
    }
 }

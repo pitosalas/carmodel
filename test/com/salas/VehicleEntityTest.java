@@ -11,6 +11,7 @@ import com.salas.world.*;
 public class VehicleEntityTest {
    
    class MyEntityBody extends EntityBody {
+      Vector2 pos;
 
       @Override
       public void createBody(EntitySprite sprite) {
@@ -20,13 +21,12 @@ public class VehicleEntityTest {
 
       @Override
       public Vector2 getPos() {
-         // TODO Auto-generated method stub
-         return null;
+         return pos;
       }
 
       @Override
       public void setPos(Vector2 pos) {
-         // TODO Auto-generated method stub
+         this.pos = pos;
          
       }
 
@@ -111,7 +111,6 @@ public class VehicleEntityTest {
       bod = new MyEntityBody();
       spr = new MyEntitySprite();
       cot = new VehicleEntity(null, bod, spr);
-      
    }
 
    @Test

@@ -26,6 +26,11 @@ public class TestState {
          // TODO Auto-generated method stub
          
       }
+      @Override
+      public String getToolTipText() {
+         // TODO Auto-generated method stub
+         return null;
+      }
    }
    
    public class ThingMessage extends BaseMessage {

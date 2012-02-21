@@ -6,6 +6,7 @@ import com.salas.world.*;
 
 public abstract class State<T extends BaseEntity> {
    
+   public String name = "???";
 	public abstract void enter(T t);
 	public abstract void execute(T t);
 	public abstract void exit(T t);
@@ -13,6 +14,10 @@ public abstract class State<T extends BaseEntity> {
 	
    public void logI(String message) {
       World.singleton().logI("STATE", message);
+   }
+   
+   public String toString() {
+      return name;
    }
 
 }

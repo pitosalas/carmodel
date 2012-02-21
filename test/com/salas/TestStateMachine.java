@@ -12,7 +12,7 @@ import com.salas.world.*;
 
 public class TestStateMachine {
    public class Thing extends BaseEntity {
-      public Thing(World ctx, EntityBody bdy, EntitySprite sprt) {
+      public Thing(World<?,?> ctx, EntityBody bdy, EntitySprite sprt) {
          super(ctx, bdy, sprt);
       }
       int entered;
@@ -26,6 +26,13 @@ public class TestStateMachine {
       public void updateState() {
          // TODO Auto-generated method stub
          
+      }
+
+
+      @Override
+      public String getToolTipText() {
+         // TODO Auto-generated method stub
+         return null;
       }
    }
 
